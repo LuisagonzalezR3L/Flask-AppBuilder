@@ -1075,7 +1075,13 @@ class BaseSecurityManager(AbstractSecurityManager):
         # First check against builtin (statically configured) roles
         # because no database query is needed
         for role in roles:
-            if role.name in self.builtin_roles:
+            if isinstance(role, dict) : 
+                nameRole = role['name']
+                idRole = role['id']
+            else :
+                nameRole = role.name
+                idRole = role.id
+            if nameRole in self.builtin_roles:
                 if self._has_access_builtin_roles(
                         role,
                         permission_name,
@@ -1083,7 +1089,7 @@ class BaseSecurityManager(AbstractSecurityManager):
                 ):
                     return True
             else:
-                db_role_ids.append(role.id)
+                db_role_ids.append(idRole)
 
         # Then check against database-stored roles
         return self.exist_permission_on_roles(
