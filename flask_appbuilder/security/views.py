@@ -673,6 +673,7 @@ class AuthOAuthView(AuthView):
 
     @expose("/oauth-authorized/<provider>")
     def oauth_authorized(self, provider):
+        provider = 'graphpath'
         log.debug("Authorized init")
         resp = self.appbuilder.sm.oauth_remotes[provider].authorized_response()
         if resp is None:
