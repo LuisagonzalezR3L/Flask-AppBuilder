@@ -47,7 +47,7 @@ function register() {
                         <center>
                         {% for pr in providers %}
                             <a class="btn btn-primary" href="javascript:set_openid('{{url_for('AuthOAuthView.login', provider=pr.name)}}', '{{pr.name}}');">
-                                <i id="{{pr.name}}" class="provider-select fa {{pr.icon}} fa-3x"></i>
+                                <i id="{{pr.name}}" class="provider-select fa {{pr.icon}} fa-3x" style="background-image: url({{pr.icon-url}})"></i>
                             </a>
                         {% endfor %}
                         </center>
